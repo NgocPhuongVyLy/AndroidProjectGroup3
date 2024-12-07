@@ -12,20 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidGroup3ShoppingApp"
         tools:targetApi="31">
-
-        <!-- MyCart as Launcher Activity -->
         <activity
-            android:name=".MyCart"
+            android:name=".Signup"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".Payment">
-        </activity>
+        <activity android:name=".Login" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".ProductDetailsActivity" />
     </application>
 
 </manifest>

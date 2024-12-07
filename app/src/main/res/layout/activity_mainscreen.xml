@@ -90,57 +90,35 @@
         android:layout_margin="10dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/searchIcon"/>
-    <!-- Search Icon -->
-    <ImageView
-        android:id="@+id/searchIcon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/ic_search"
-        android:layout_margin="10dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/glh10"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:inputType="text"/>
 
     <!-- ScrollView for Product Categories -->
 
     <!-- Add your product category views here -->
     <TextView
+        android:id="@+id/tvSelectProductTypeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Women"
-        app:layout_constraintBottom_toBottomOf="@id/glh20"
+        android:text="Select Product Type"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:padding="5dp"
+        app:layout_constraintBottom_toTopOf="@id/glh20"
         app:layout_constraintTop_toBottomOf="@id/glh10"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/glv25pc"/>
+        app:layout_constraintEnd_toStartOf="@id/spinnerProductType" />
+    <Spinner
+        android:id="@+id/spinnerProductType"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:entries="@array/product_types"
+        app:layout_constraintBottom_toTopOf="@id/glh20"
+        app:layout_constraintTop_toBottomOf="@id/glh10"
+        app:layout_constraintStart_toEndOf="@id/tvSelectProductTypeText"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Men"
-        android:padding="16dp"
-        app:layout_constraintBottom_toBottomOf="@id/glh20"
-        app:layout_constraintTop_toBottomOf="@id/glh10"
-        app:layout_constraintStart_toEndOf="@id/glv25pc"
-        app:layout_constraintEnd_toStartOf="@id/glv50pc"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Kids"
-        android:padding="16dp"
-        app:layout_constraintBottom_toBottomOf="@id/glh20"
-        app:layout_constraintTop_toBottomOf="@id/glh10"
-        app:layout_constraintStart_toEndOf="@id/glv50pc"
-        app:layout_constraintEnd_toStartOf="@id/glv75pc"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Jean"
-        android:padding="16dp"
-        app:layout_constraintBottom_toBottomOf="@id/glh20"
-        app:layout_constraintTop_toBottomOf="@id/glh10"
-        app:layout_constraintStart_toEndOf="@id/glv75pc"
-        app:layout_constraintEnd_toEndOf="parent"/>
     <!-- Scrollview promotion -->
     <ImageView
         android:id="@+id/promotionImage1"
@@ -179,134 +157,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.33"/>
     <!-- Product List -->
-    <!-- Product Item 1 -->
-    <View
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/productRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/view_product_list"
-        android:layout_margin="5dp"
         app:layout_constraintTop_toBottomOf="@id/glh40"
-        app:layout_constraintBottom_toTopOf="@+id/glh65"
+        app:layout_constraintBottom_toTopOf="@id/glh90"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/glv50pc"
-        />
-    <ImageView
-        android:id="@+id/imageProduct1"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_margin="10dp"
-        android:src="@drawable/image_product1"
-        app:layout_constraintTop_toBottomOf="@id/glh40"
-        app:layout_constraintBottom_toTopOf="@id/twProduct1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/glv50pc"
-        />
-    <TextView
-        android:id="@+id/twProduct1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Product Information"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/imageProduct1"
-        app:layout_constraintBottom_toTopOf="@+id/glh65"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/glv50pc"/>
-    <!-- Product Item 2 -->
-    <View
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/view_product_list"
-        android:layout_margin="5dp"
-        app:layout_constraintTop_toBottomOf="@id/glh40"
-        app:layout_constraintBottom_toTopOf="@+id/glh65"
-        app:layout_constraintStart_toStartOf="@id/glv50pc"
         app:layout_constraintEnd_toEndOf="parent"
-        />
-    <ImageView
-        android:id="@+id/imageProduct2"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_margin="10dp"
-        android:src="@drawable/image_product2"
-        app:layout_constraintTop_toBottomOf="@id/glh40"
-        app:layout_constraintBottom_toTopOf="@id/twProduct2"
-        app:layout_constraintStart_toStartOf="@+id/glv50pc"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
-    <TextView
-        android:id="@+id/twProduct2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Product Information"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/imageProduct2"
-        app:layout_constraintBottom_toTopOf="@+id/glh65"
-        app:layout_constraintStart_toStartOf="@+id/glv50pc"
-        app:layout_constraintEnd_toEndOf="parent"/>
-    <!-- Product Item 3 -->
-    <View
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/view_product_list"
-        android:layout_margin="5dp"
-        app:layout_constraintTop_toBottomOf="@+id/glh65"
-        app:layout_constraintBottom_toTopOf="@+id/glh90"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/glv50pc"
-        />
-    <ImageView
-        android:id="@+id/imageProduct3"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_margin="10dp"
-        android:src="@drawable/image_product3"
-        app:layout_constraintTop_toBottomOf="@id/glh65"
-        app:layout_constraintBottom_toTopOf="@id/twProduct3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/glv50pc"
-        />
-    <TextView
-        android:id="@+id/twProduct3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Product Information"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/imageProduct3"
-        app:layout_constraintBottom_toTopOf="@+id/glh90"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/glv50pc"/>
-    <!-- Product Item 4 -->
-    <View
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/view_product_list"
-        android:layout_margin="5dp"
-        app:layout_constraintTop_toBottomOf="@+id/glh65"
-        app:layout_constraintBottom_toTopOf="@+id/glh90"
-        app:layout_constraintStart_toStartOf="@+id/glv50pc"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
-    <ImageView
-        android:id="@+id/imageProduct4"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_margin="10dp"
-        android:src="@drawable/image_product4"
-        app:layout_constraintTop_toBottomOf="@id/glh65"
-        app:layout_constraintBottom_toTopOf="@id/twProduct4"
-        app:layout_constraintStart_toStartOf="@+id/glv50pc"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
-    <TextView
-        android:id="@+id/twProduct4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Product Information"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/imageProduct4"
-        app:layout_constraintBottom_toTopOf="@+id/glh90"
-        app:layout_constraintStart_toStartOf="@+id/glv50pc"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:layout_margin="10dp" />
+
     <!-- Bottom Navigation Bar -->
     <View
         android:layout_width="0dp"

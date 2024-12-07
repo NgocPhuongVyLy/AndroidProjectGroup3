@@ -10,6 +10,10 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class MySqlHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
@@ -30,7 +34,9 @@ public class MySqlHelper extends SQLiteOpenHelper {
             "category TEXT NOT NULL, " +
             "details TEXT, " +
             "price DECIMAL NOT NULL, " +
-            "image TEXT);"; // Image will store the image name (or path)
+            "image TEXT, " +
+            "size TEXT, " +
+            "brand TEXT);"; // Image will store the image name (or path)
 
     // Order table creation SQL
     private static final String CREATE_ORDER_TABLE = "CREATE TABLE ordertable (" +
@@ -39,7 +45,7 @@ public class MySqlHelper extends SQLiteOpenHelper {
             "orderstatus TEXT DEFAULT 'Pending', " +
             "FOREIGN KEY (userid) REFERENCES User(userid));";
 
-    // OrderItems table creation SQL
+    // OrderItems table creation SQL (New Table)
     private static final String CREATE_ORDER_ITEMS_TABLE = "CREATE TABLE orderitems (" +
             "order_item_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "orderid INTEGER NOT NULL, " +
@@ -74,12 +80,16 @@ public class MySqlHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_ORDER_ITEMS_TABLE);
         db.execSQL(CREATE_PAYMENT_TABLE);
 
-        // Insert sample data for testing
-        insertSampleData(db);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // If upgrading to a newer version, handle database schema changes
+        if (oldVersion < 2) {
+            // Add 'size' column in case it's missing in older versions
+            db.execSQL("ALTER TABLE productdetails ADD COLUMN size TEXT;");
+            db.execSQL("ALTER TABLE productdetails ADD COLUMN brand TEXT;");
+        }
         // Drop all tables if they exist and create new ones
         db.execSQL("DROP TABLE IF EXISTS User");
         db.execSQL("DROP TABLE IF EXISTS productdetails");
@@ -90,75 +100,6 @@ public class MySqlHelper extends SQLiteOpenHelper {
     }
 
 
-// Method to insert sample data for testing
-    private void insertSampleData(SQLiteDatabase db) {
-        // Insert sample user data
-        ContentValues userValues = new ContentValues();
-        userValues.put("username", "JohnDoe");
-        userValues.put("password", "password123");
-        userValues.put("email", "johndoe@example.com");
-        userValues.put("phone_number", "1234567890");
-        long userId = db.insert("User", null, userValues);
-
-        // Insert more sample user data
-        ContentValues userValues2 = new ContentValues();
-        userValues2.put("username", "JaneDoe");
-        userValues2.put("password", "password456");
-        userValues2.put("email", "janedoe@example.com");
-        userValues2.put("phone_number", "0987654321");
-        long userId2 = db.insert("User", null, userValues2);
-
-        // Insert sample product data
-        ContentValues productValues1 = new ContentValues();
-        productValues1.put("product_name", "Sample Product 1");
-        productValues1.put("category", "Electronics");
-        productValues1.put("details", "This is a sample product 1.");
-        productValues1.put("price", 99.99);
-        productValues1.put("image", "sample_image1.jpg");  // Assume the image is stored locally
-        long productId1 = db.insert("productdetails", null, productValues1);
-
-        ContentValues productValues2 = new ContentValues();
-        productValues2.put("product_name", "Sample Product 2");
-        productValues2.put("category", "Home Appliances");
-        productValues2.put("details", "This is a sample product 2.");
-        productValues2.put("price", 49.99);
-        productValues2.put("image", "sample_image2.jpg");  // Assume the image is stored locally
-        long productId2 = db.insert("productdetails", null, productValues2);
-        Log.d("Database", "Inserted product ID: " + productId1 + ", " + productId2);
-
-        // Insert sample order data
-        ContentValues orderValues = new ContentValues();
-        orderValues.put("userid", userId);  // Use the userId from the inserted user
-        long orderId = db.insert("ordertable", null, orderValues);
-        Log.d("Database", "Inserted order ID: " + orderId);
-
-        // Insert sample order item data
-        ContentValues orderItemValues1 = new ContentValues();
-        orderItemValues1.put("orderid", orderId);
-        orderItemValues1.put("productid", productId1);  // Use the productId from the inserted product
-        orderItemValues1.put("quantity", 2);  // Example quantity
-        long orderItemId1 = db.insert("orderitems", null, orderItemValues1);
-
-        ContentValues orderItemValues2 = new ContentValues();
-        orderItemValues2.put("orderid", orderId);
-        orderItemValues2.put("productid", productId2);  // Use the second productId
-        orderItemValues2.put("quantity", 1);  // Example quantity
-        long orderItemId2 = db.insert("orderitems", null, orderItemValues2);
-
-        Log.d("Database", "Inserted order items with IDs: " + orderItemId1 + ", " + orderItemId2);
-
-        // Insert sample payment data
-        ContentValues paymentValues = new ContentValues();
-        paymentValues.put("userid", userId);
-        paymentValues.put("orderid", orderId);
-        paymentValues.put("address", "123 Street Name");
-        paymentValues.put("totalamount", 199.98);  // 2 products at $99.99 each
-        paymentValues.put("paymentmethod", "Visa");
-        paymentValues.put("paymentstatus", "Pending");
-        db.insert("payment", null, paymentValues);
-
-        Log.d("Database", "Sample data inserted successfully");
-    }
 
 
     // Method to get cart items for a specific order
@@ -216,4 +157,165 @@ public class MySqlHelper extends SQLiteOpenHelper {
         String query = "SELECT * FROM payment WHERE userid = ? AND orderid = ?";
         return db.rawQuery(query, new String[]{String.valueOf(userId), String.valueOf(orderId)});
     }
+
+    // NPVL DB
+    // Main Screen
+    public void insertSampleProducts() {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // Check if products already exist in the database
+        Cursor cursor = db.rawQuery("SELECT * FROM productdetails", null);
+        if (cursor.getCount() == 0) {
+            // Insert products if database is empty
+            ContentValues values = new ContentValues();
+            values.put("product_name", "White hooded jacket");
+            values.put("category", "Women’s Clothing");
+            values.put("details", "100% Cotton");
+            values.put("price", 20.99);
+            values.put("image", "image_product1.jpeg");
+            values.put("size", "M");
+            values.put("brand", "Roots");
+            db.insert("productdetails", null, values);
+            Log.d("MySqlHelper", "Inserted product: White hooded jacket");
+
+            values.clear();
+            values.put("product_name", "Party Dress");
+            values.put("category", "Women’s Clothing");
+            values.put("details", "Elegant evening dress");
+            values.put("price", 149.99);
+            values.put("image", "image_product5.jpeg");
+            values.put("size", "S");
+            values.put("brand", "H&M");
+            db.insert("productdetails", null, values);
+            Log.d("MySqlHelper", "Inserted product: Party Dress");
+
+            // Add two new products
+            values.clear();
+            values.put("product_name", "Leather Jacket");
+            values.put("category", "Men’s Clothing");
+            values.put("details", "Genuine leather, stylish and comfortable");
+            values.put("price", 250.00);
+            values.put("image", "image_product3.jpeg");
+            values.put("size", "L");
+            values.put("brand", "Levi’s");
+            db.insert("productdetails", null, values);
+            Log.d("MySqlHelper", "Inserted product: Leather Jacket");
+
+            values.clear();
+            values.put("product_name", "Running Shoes");
+            values.put("category", "Sportswear");
+            values.put("details", "Comfortable running shoes for all types of athletes");
+            values.put("price", 99.99);
+            values.put("image", "image_product4.jpg");
+            values.put("size", "8");
+            values.put("brand", "Nike");
+            db.insert("productdetails", null, values);
+            Log.d("MySqlHelper", "Inserted product: Running Shoes");
+        }
+        Log.d("MySqlHelper", "Total products after insertion: " + cursor.getCount());
+
+        cursor.close();
+        db.close();
+    }
+
+
+    public List<Product> getAllProducts() {
+        List<Product> productList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM productdetails";
+        Cursor cursor = db.rawQuery(query, null);
+        Log.d("MySqlHelper", "Fetched products: " + productList);
+
+        Log.d("MySqlHelper", "Number of products fetched: " + cursor.getCount());
+        if (cursor.moveToFirst()) {
+            do {
+                Product product = new Product(
+                        cursor.getInt(cursor.getColumnIndexOrThrow("productid")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("product_name")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("category")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("details")),
+                        cursor.getDouble(cursor.getColumnIndexOrThrow("price")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("image")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("size")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("brand"))
+                );
+                productList.add(product);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        Log.d("MySqlHelper", "Products Count: " + productList.size());
+        return productList;
+    }
+
+    public List<Product> getProductsByCategory(String category) {
+        List<Product> productList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query;
+
+        if (category.equals("All")) {
+            query = "SELECT * FROM productdetails";
+        } else {
+            query = "SELECT * FROM productdetails WHERE category = ?";
+        }
+
+        Cursor cursor = db.rawQuery(query, category.equals("All") ? null : new String[]{category});
+
+        if (cursor.moveToFirst()) {
+            do {
+                Product product = new Product(
+                        cursor.getInt(cursor.getColumnIndexOrThrow("productid")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("product_name")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("category")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("details")),
+                        cursor.getDouble(cursor.getColumnIndexOrThrow("price")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("image")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("size")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("brand"))
+                );
+                productList.add(product);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return productList;
+    }
+
+    //SEARCH
+    public List<Product> getProductsBySearchQuery(String query) {
+        List<Product> productList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String sql = "SELECT * FROM productdetails WHERE product_name LIKE ? OR details LIKE ?";
+        String wildcardQuery = "%" + query + "%";
+        Cursor cursor = db.rawQuery(sql, new String[]{wildcardQuery, wildcardQuery});
+
+        if (cursor.moveToFirst()) {
+            do {
+                Product product = new Product(
+                        cursor.getInt(cursor.getColumnIndexOrThrow("productid")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("product_name")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("category")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("details")),
+                        cursor.getDouble(cursor.getColumnIndexOrThrow("price")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("image")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("size")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("brand"))
+                );
+                productList.add(product);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return productList;
+    }
+
+
+
+    // NPVL DB
+
+
+
 }

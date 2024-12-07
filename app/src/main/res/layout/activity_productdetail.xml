@@ -78,28 +78,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         />
-    <EditText
-        android:id="@+id/searchBar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/searchbar"
-        android:text="Search for clothes..."
-        android:textSize="14sp"
-        android:padding="16dp"
-        android:layout_margin="10dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/searchIcon"/>
-    <!-- Search Icon -->
+    <!-- Back Icon -->
     <ImageView
-        android:id="@+id/searchIcon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/ic_search"
+        android:id="@+id/imageBackIcon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/back_icon"
         android:layout_margin="10dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/glh10"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintBottom_toTopOf="@+id/glh10"
+        app:layout_constraintStart_toStartOf="parent"/>
+
     <!-- Product Item -->
     <ImageView
         android:id="@+id/imageProductItem"
@@ -112,40 +101,55 @@
         app:layout_constraintBottom_toTopOf="@id/glh50"
         />
     <TextView
-        android:id="@+id/twProductItem"
+        android:id="@+id/twProductName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Product Name:\nDescription:\nCategory:\nBrand:\nSize/Dimensions:\nShipping Information:\nPrice:\nRating:"
-        android:textSize="16sp"
+        android:text="Product Name:"
+        style="@style/ProductNameStyle"
         android:layout_margin="5dp"
         app:layout_constraintTop_toBottomOf="@+id/imageProductItem"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/glv50pc"/>
-    <!-- Color Selection -->
-    <!-- Color Selection Text -->
+        app:layout_constraintBottom_toTopOf="@id/tvProductPrice"
+        app:layout_constraintStart_toStartOf="parent"/>
     <TextView
-        android:id="@+id/twChoseColor"
+        android:id="@+id/tvProductPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Choose Color:"
-        android:padding="5dp"
-        android:layout_gravity="center_vertical"
-        app:layout_constraintTop_toBottomOf="@id/glh70"
-        app:layout_constraintBottom_toTopOf="@id/glh80"
+        android:text="Price:"
+        style="@style/ProductInfoStyle"
+        android:layout_margin="5dp"
+        app:layout_constraintTop_toBottomOf="@+id/twProductName"
+        app:layout_constraintBottom_toTopOf="@id/tvProductSize"
+        app:layout_constraintStart_toStartOf="parent"/>
+    <TextView
+        android:id="@+id/tvProductSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Size:"
+        style="@style/ProductInfoStyle"
+        android:layout_margin="5dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvProductPrice"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/colorSpinner"/>
-
-    <!-- Color Selection Spinner -->
-    <Spinner
-        android:id="@+id/colorSpinner"
+        app:layout_constraintBottom_toTopOf="@id/tvProductBrand"/>
+    <TextView
+        android:id="@+id/tvProductBrand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:padding="12dp"
-        app:layout_constraintTop_toBottomOf="@id/glh70"
-        app:layout_constraintBottom_toTopOf="@id/glh80"
-        app:layout_constraintStart_toEndOf="@+id/twChoseColor"
-        app:layout_constraintEnd_toEndOf="@id/glv50pc"/>
+        android:text="Brand:"
+        style="@style/ProductInfoStyle"
+        android:layout_margin="5dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvProductSize"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvProductDescription"/>
+    <TextView
+        android:id="@+id/tvProductDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description:"
+        style="@style/ProductInfoStyle"
+        android:layout_margin="5dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvProductBrand"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/glh70"/>
     <!-- Quantity Selection -->
     <TextView
         android:id="@+id/twQuantity"
@@ -156,7 +160,7 @@
         android:layout_gravity="center_vertical"
         app:layout_constraintTop_toBottomOf="@id/glh70"
         app:layout_constraintBottom_toTopOf="@id/glh80"
-        app:layout_constraintStart_toEndOf="@id/glv50pc"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/etQuantity"/>
     <EditText
         android:id="@+id/etQuantity"
@@ -167,8 +171,8 @@
         android:inputType="number"
         app:layout_constraintTop_toBottomOf="@id/glh70"
         app:layout_constraintBottom_toTopOf="@id/glh80"
-        app:layout_constraintStart_toEndOf="@id/twQuantity"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/twQuantity"
+        app:layout_constraintEnd_toEndOf="@id/glv50pc" />
     <!-- Button Add to Cart -->
     <Button
         android:id="@+id/buttonAddToCart"

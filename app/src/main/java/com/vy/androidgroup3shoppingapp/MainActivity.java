@@ -65,12 +65,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         ImageView navCart = findViewById(R.id.nav_cart);
         navCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Navigate to MyCartActivity
-                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(MainActivity.this, MyCart.class);
                 startActivity(intent);
             }
         });

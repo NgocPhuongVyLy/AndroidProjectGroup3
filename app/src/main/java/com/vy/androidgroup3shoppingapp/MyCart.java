@@ -33,19 +33,22 @@ public class MyCart extends AppCompatActivity {
         cartLayout = findViewById(R.id.cartLayout);
         totalAmountTextView = findViewById(R.id.totalAmount);
 
-        int userId = 1; // Replace with the actual user ID for testing
-        loadCartItems(cartLayout, userId);
+
+
 //        // Retrieve user ID from shared preferences
-//        SharedPreferences sharedPref = getSharedPreferences("userDetails", Context.MODE_PRIVATE);
-//        int userId = sharedPref.getInt("userId", -1); // Default value is -1 if not found
-//
-//        if (userId != -1) {
-//            loadCartItems(cartLayout, userId);
-//        } else {
-//            Toast.makeText(this, "User ID not found. Please log in again.", Toast.LENGTH_SHORT).show();
-//            // Handle user not logged in scenario (e.g., redirect to login page)
-//        }
-//    }
+        SharedPreferences sharedPref = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+        int userId = sharedPref.getInt("userId", -1); // Default value is -1 if not found
+
+        if (userId != -1) {
+            loadCartItems(cartLayout, userId);
+        } else {
+            Toast.makeText(this, "User ID not found. Please log in again.", Toast.LENGTH_SHORT).show();
+            // Handle user not logged in scenario (e.g., redirect to login page)
+            Intent loginIntent = new Intent(this, Login.class);
+            startActivity(loginIntent);
+            finish();
+        }
+
 
 
         // Set OnClickListener for the checkout button

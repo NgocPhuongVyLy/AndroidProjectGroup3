@@ -48,15 +48,15 @@ public class Payment extends AppCompatActivity {
         debit = findViewById(R.id.debit);
 
         // Retrieve user ID from shared preferences
-//        SharedPreferences sharedPref = getSharedPreferences("userDetails", MODE_PRIVATE);
-//        userId = sharedPref.getInt("userId", -1); // Default value is -1 if not found
-//
-//        if (userId == -1) {
-//            Toast.makeText(this, "User ID not found. Please log in again.", Toast.LENGTH_SHORT).show();
-//            // Handle user not logged in scenario (e.g., redirect to login page)
-//            return;
-//        }
-        userId = 1;
+        SharedPreferences sharedPref = getSharedPreferences("userDetails", MODE_PRIVATE);
+        userId = sharedPref.getInt("userId", -1); // Default value is -1 if not found
+
+        if (userId == -1) {
+            Toast.makeText(this, "User ID not found. Please log in again.", Toast.LENGTH_SHORT).show();
+            // Handle user not logged in scenario (e.g., redirect to login page)
+            return;
+        }
+
 
         // Get the current order ID and total amount based on the user's cart
         loadTotalAmount();

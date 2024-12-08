@@ -100,6 +100,7 @@ public class MySqlHelper extends SQLiteOpenHelper {
     }
 
 
+    //methods for sneha's page
 
 
     // Method to get cart items for a specific order
@@ -157,6 +158,8 @@ public class MySqlHelper extends SQLiteOpenHelper {
         String query = "SELECT * FROM payment WHERE userid = ? AND orderid = ?";
         return db.rawQuery(query, new String[]{String.valueOf(userId), String.valueOf(orderId)});
     }
+
+    //end methods for sneha's screen
 
     // NPVL DB
     // Main Screen

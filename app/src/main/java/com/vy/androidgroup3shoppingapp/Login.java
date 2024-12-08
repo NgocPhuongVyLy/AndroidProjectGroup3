@@ -43,14 +43,21 @@ public class Login extends AppCompatActivity {
         // Retrieve saved credentials from SharedPreferences
         String savedUsername = sharedPreferences.getString("username", ""); // Retrieve saved username
         String savedPassword = sharedPreferences.getString("userPassword", ""); // Retrieve saved password
+        int userId = sharedPreferences.getInt(username + "_userId", -1); // Fetch userId
 
         // Validate login credentials
         if (username.equals(savedUsername) && password.equals(savedPassword)) {
             // Login successful
             Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show();
 
+            // Save the userId for later use
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("userId", userId); // Save the logged-in user's ID
+            editor.putBoolean("isLoggedIn", true); // Track login state
+            editor.apply();
+
             // Navigate to the main screen (MainActivity)
-            Intent intent = new Intent(Login.this, MainActivity.class);
+            Intent intent = new Intent(Login.this, ProductDetailsActivity.class);
             startActivity(intent);
             finish();
         } else {

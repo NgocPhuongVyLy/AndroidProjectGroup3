@@ -26,6 +26,10 @@
         <activity android:name=".ProductDetailsActivity" />
         <activity android:name=".MyCart" />
         <activity android:name=".Payment" />
+        <activity android:name=".EditActivity" />
+        <activity android:name=".Order" />
+        <activity android:name=".OrderActivity" />
+        <activity android:name=".ProfileActivity" />
     </application>
 
 </manifest>

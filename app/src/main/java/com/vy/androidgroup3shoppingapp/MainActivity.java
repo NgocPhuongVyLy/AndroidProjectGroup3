@@ -55,6 +55,25 @@ public class MainActivity extends AppCompatActivity {
         // Set adapter
         //productAdapter = new ProductAdapter(this, productList);
         //productRecyclerView.setAdapter(productAdapter);
+        //Navigate to  Profile Screen
+        ImageView navProfile = findViewById(R.id.nav_profile);
+        navProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to MyUserProfileActivity
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+        ImageView navCart = findViewById(R.id.nav_cart);
+        navCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to MyCartActivity
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // Initialize Spinner for category selection
         categorySpinner = findViewById(R.id.spinnerProductType);  // Assume a Spinner is defined in XML

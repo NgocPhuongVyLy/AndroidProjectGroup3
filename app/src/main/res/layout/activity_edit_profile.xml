@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#14274f"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_v55"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.50"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_h10"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_h30"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_h40"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_h50"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_h90"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/tv_edit_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Edit Profile"
+        android:textColor="#ffffff"
+        android:paddingBottom="40dp"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Name Input -->
+    <EditText
+        android:id="@+id/et_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        android:textColorHint="#ffffff"
+        android:paddingBottom="40dp"
+        android:inputType="textPersonName"
+        app:layout_constraintTop_toBottomOf="@id/gl_h10"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Email Input -->
+    <EditText
+        android:id="@+id/et_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:textColorHint="#ffffff"
+        android:paddingBottom="40dp"
+        android:inputType="textEmailAddress"
+        app:layout_constraintTop_toBottomOf="@id/gl_h30"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Phone Input -->
+    <EditText
+        android:id="@+id/et_phone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Phone Number"
+        android:textColorHint="#ffffff"
+        android:paddingBottom="40dp"
+        android:inputType="phone"
+        app:layout_constraintTop_toBottomOf="@id/gl_h40"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Address Input -->
+    <EditText
+        android:id="@+id/et_address"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Address"
+        android:textColorHint="#ffffff"
+        android:paddingBottom="40dp"
+        android:inputType="textPostalAddress"
+        app:layout_constraintTop_toBottomOf="@id/gl_h50"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Save Button -->
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        app:layout_constraintTop_toBottomOf="@id/et_address"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="8dp" />
+
+    <!-- Cancel Button -->
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        app:layout_constraintTop_toBottomOf="@id/et_address"
+        app:layout_constraintStart_toEndOf="@id/btn_save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="8dp" />
+
+    <ImageButton
+        android:id="@+id/btn_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/outline_home_24"
+        android:layout_margin="8dp"
+        android:layout_marginRight="15dp"
+        android:background="#14274f"
+        app:layout_constraintTop_toBottomOf="@id/gl_h90"
+        app:layout_constraintEnd_toStartOf="@id/btn_cart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btn_cart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/outline_shopping_cart_24"
+        android:text="Cart"
+        android:layout_margin="8dp"
+        android:layout_marginRight="15dp"
+        android:background="#14274f"
+        app:layout_constraintTop_toBottomOf="@id/gl_h90"
+        app:layout_constraintEnd_toStartOf="@id/btn_profile"
+        app:layout_constraintStart_toEndOf="@id/btn_home"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btn_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/outline_person_24"
+        android:layout_margin="8dp"
+        android:layout_marginRight="15dp"
+        android:background="#14274f"
+        app:layout_constraintTop_toBottomOf="@id/gl_h90"
+        app:layout_constraintEnd_toStartOf="@id/btn_logo"
+        app:layout_constraintStart_toEndOf="@id/btn_cart"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btn_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_logo_dev_24"
+        android:layout_margin="8dp"
+        android:layout_marginRight="15dp"
+        app:layout_constraintTop_toBottomOf="@id/gl_h90"
+        android:background="#14274f"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_profile"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

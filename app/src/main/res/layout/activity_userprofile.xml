@@ -6,7 +6,7 @@
     android:background="#14274f"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ProfileActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_v55"
@@ -14,6 +14,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.55"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_v50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_h10"
@@ -65,7 +72,6 @@
         android:textColor="#ffffff"
         android:layout_margin="8dp"
         android:layout_marginRight="15dp"
-
         app:layout_constraintBottom_toTopOf="@id/gl_h10"
         app:layout_constraintEnd_toStartOf="@id/btn_support"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,6 +85,7 @@
         android:background="@null"
         android:padding="10dp"
         android:contentDescription="Customer Support"
+        android:onClick="cusServiceClicked"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/gl_h10"
         app:layout_constraintStart_toEndOf="@id/gl_v55"
@@ -92,6 +99,7 @@
         android:background="@null"
         android:padding="10dp"
         android:contentDescription="Settings"
+        android:onClick="settingsClicked"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/gl_h10"
         app:layout_constraintStart_toEndOf="@id/btn_support"
@@ -113,12 +121,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Edit profile"
+        android:onClick="editClicked"
         android:textColor="@color/white"
         android:textAllCaps="false"
         android:background="@drawable/round_b"
         app:layout_constraintTop_toBottomOf="@id/gl_h10"
         app:layout_constraintBottom_toTopOf="@id/btn_logout"
-        app:layout_constraintStart_toEndOf="@id/user_img"
+        app:layout_constraintStart_toEndOf="@id/gl_v55"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <Button
@@ -126,33 +135,54 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Log Out"
+        android:onClick="logClicked"
         android:textColor="@color/white"
         android:textAllCaps="false"
         android:background="@drawable/round_b"
         app:layout_constraintTop_toBottomOf="@id/btn_Edit"
         app:layout_constraintBottom_toTopOf="@id/gl_h30"
-        app:layout_constraintStart_toEndOf="@id/user_img"
+        app:layout_constraintStart_toEndOf="@id/gl_v55"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <Button
-        android:id="@+id/btn_address"
-        android:text="Address   >>"
+        android:id="@+id/btn_track"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Track Order  >>"
+        android:onClick="trackClicked"
+        android:textAllCaps="false"
         android:textSize="20sp"
         android:textColor="#ffffff"
         android:textAlignment="textStart"
-        android:textAllCaps="false"
-        android:background="#14274f"
         android:layout_margin="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_button"
+        app:layout_constraintTop_toBottomOf="@id/gl_h30"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/gl_h30"
         app:layout_constraintBottom_toTopOf="@id/btn_messages"/>
+    />
+
+    <!--    <Button-->
+    <!--        android:id="@+id/btn_address"-->
+    <!--        android:text="Address   >>"-->
+    <!--        android:onClick="addressClicked"-->
+    <!--        android:textSize="20sp"-->
+    <!--        android:textColor="#ffffff"-->
+    <!--        android:textAlignment="textStart"-->
+    <!--        android:textAllCaps="false"-->
+    <!--        android:background="#14274f"-->
+    <!--        android:layout_margin="8dp"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/gl_h30"-->
+    <!--        app:layout_constraintBottom_toTopOf="@id/btn_messages"/>-->
 
     <Button
         android:id="@+id/btn_messages"
         android:text="Messages   >>"
+        android:onClick="messageClicked"
         android:textSize="20sp"
         android:textColor="#ffffff"
         android:textAlignment="textStart"
@@ -163,12 +193,13 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_address"
+        app:layout_constraintTop_toBottomOf="@id/btn_track"
         app:layout_constraintBottom_toTopOf="@id/gl_h50"/>
 
     <Button
         android:id="@+id/btn_orders"
         android:text="Orders   >>"
+        android:onClick="ordersClicked"
         android:textSize="20sp"
         android:textColor="#ffffff"
         android:textAlignment="textStart"
@@ -185,6 +216,7 @@
     <Button
         android:id="@+id/btn_reviews"
         android:text="Reviews   >>"
+        android:onClick="reviewsClicked"
         android:textSize="20sp"
         android:textColor="#ffffff"
         android:textAlignment="textStart"
@@ -201,6 +233,7 @@
     <Button
         android:id="@+id/btn_coupon"
         android:text="Coupons &amp; Offers   >>"
+        android:onClick="couponClicked"
         android:textSize="20sp"
         android:textColor="#ffffff"
         android:textAlignment="textStart"
@@ -216,6 +249,7 @@
     <Button
         android:id="@+id/btn_crbal"
         android:text="Credit Balance   >>"
+        android:onClick="creditClicked"
         android:textSize="20sp"
         android:textColor="#ffffff"
         android:textAlignment="textStart"
@@ -229,64 +263,61 @@
         app:layout_constraintTop_toBottomOf="@id/btn_coupon"
         app:layout_constraintBottom_toTopOf="@id/gl_h90"/>
 
-    <TextView
-        android:id="@+id/tv_home"
+    <ImageButton
+        android:id="@+id/btn_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Home"
-        android:textSize="20sp"
-        android:textStyle="italic"
+        android:src="@drawable/outline_home_24"
         android:layout_margin="8dp"
         android:layout_marginRight="15dp"
-        android:textColor="#ffffff"
+        android:background="#14274f"
+        android:onClick="btnHomeClicked"
         app:layout_constraintTop_toBottomOf="@id/gl_h90"
-        app:layout_constraintEnd_toStartOf="@id/tv_cart"
+        app:layout_constraintEnd_toStartOf="@id/btn_cart"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_profile"
+    <ImageButton
+        android:id="@+id/btn_cart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Profile"
-        android:textSize="20sp"
-        android:textStyle="italic"
-        android:layout_margin="8dp"
-        android:layout_marginRight="15dp"
-        android:textColor="#ffffff"
-        app:layout_constraintTop_toBottomOf="@id/gl_h90"
-        app:layout_constraintEnd_toStartOf="@id/tv_logo"
-        app:layout_constraintStart_toEndOf="@id/tv_cart"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_cart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:src="@drawable/outline_shopping_cart_24"
         android:text="Cart"
-        android:textSize="20sp"
-        android:textStyle="italic"
         android:layout_margin="8dp"
         android:layout_marginRight="15dp"
-        android:textColor="#ffffff"
+        android:background="#14274f"
+        android:onClick="btnCartClicked"
         app:layout_constraintTop_toBottomOf="@id/gl_h90"
-        app:layout_constraintEnd_toStartOf="@id/tv_profile"
-        app:layout_constraintStart_toEndOf="@id/tv_home"
+        app:layout_constraintEnd_toStartOf="@id/gl_v50"
+        app:layout_constraintStart_toEndOf="@id/btn_home"
         app:layout_constraintBottom_toBottomOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_logo"
+    <ImageButton
+        android:id="@+id/btn_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Logo"
-        android:textSize="20sp"
-        android:textStyle="italic"
+        android:src="@drawable/outline_person_24"
         android:layout_margin="8dp"
         android:layout_marginRight="15dp"
-        android:textColor="#ffffff"
+        android:background="#14274f"
+        android:onClick="btnProfileClicked"
+        app:layout_constraintTop_toBottomOf="@id/gl_h90"
+        app:layout_constraintEnd_toStartOf="@id/btn_logo"
+        app:layout_constraintStart_toEndOf="@id/gl_v50"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btn_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_logo_dev_24"
+        android:layout_margin="8dp"
+        android:layout_marginRight="15dp"
+        android:background="#14274f"
+        android:onClick="btnLogoClicked"
         app:layout_constraintTop_toBottomOf="@id/gl_h90"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tv_profile"
+        app:layout_constraintStart_toEndOf="@id/btn_profile"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 

@@ -1,6 +1,7 @@
 package com.vy.androidgroup3shoppingapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -41,6 +42,11 @@ public class EditActivity extends AppCompatActivity {
 
             Toast.makeText(EditActivity.this,
                     "Profile Saved: " + name, Toast.LENGTH_SHORT).show();
+
+            SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("username", name);
+            editor.apply();
 
             // Return to MainActivity
             finish();

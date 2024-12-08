@@ -108,6 +108,32 @@ public class OrderActivity extends AppCompatActivity {
 
     }
 
+    // Handling button clicked
+    public void allOrdersClicked(View v) {
+        // Implement functionality for the "All Orders" button click
+        Toast.makeText(this, "All Orders clicked", Toast.LENGTH_SHORT).show();
+        filterOrders("All Orders");
+    }
+
+    public void shippedClicked(View v) {
+        // Implement functionality for the "All Orders" button click
+        Toast.makeText(this, "Shipped clicked", Toast.LENGTH_SHORT).show();
+        filterOrders("Shipped");
+    }
+
+    public void deliveredClicked(View v) {
+        // Implement functionality for the "All Orders" button click
+        Toast.makeText(this, "Delivery button clicked", Toast.LENGTH_SHORT).show();
+        filterOrders("Delivered");
+    }
+
+    public void returnsClicked(View v) {
+        // Implement functionality for the "All Orders" button click
+        Toast.makeText(this, "Returns clicked", Toast.LENGTH_SHORT).show();
+
+        filterOrders("Returns");
+    }
+
     private void loadAllOrders(ArrayList<Order> orderToDisplay) {
         orderContainer.removeAllViews();
         int previousId = ConstraintSet.PARENT_ID; //Attach first order to parent
@@ -156,6 +182,39 @@ public class OrderActivity extends AppCompatActivity {
             // Update previousId
             previousId = orderView.getId();
         }
+
+        //Navigation click listener
+        btnHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OrderActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OrderActivity.this, EditActivity.class); //replace with cart class when available
+                startActivity(intent);
+            }
+        });
+
+        btnProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OrderActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnLogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OrderActivity.this, EditActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     // Set up button listeners

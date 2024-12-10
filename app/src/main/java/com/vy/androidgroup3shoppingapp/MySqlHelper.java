@@ -16,7 +16,7 @@ import java.util.List;
 
 public class MySqlHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_NAME = "shoppingApp.db";
 
     // User table creation SQL
@@ -94,7 +94,7 @@ public class MySqlHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS User");
         db.execSQL("DROP TABLE IF EXISTS productdetails");
         db.execSQL("DROP TABLE IF EXISTS ordertable");
-        db.execSQL("DROP TABLE IF EXISTS orderitems");
+        db.execSQL("DROP TABLE IF EXISTS orderitems"); // Drop OrderItems table if exists
         db.execSQL("DROP TABLE IF EXISTS payment");
         onCreate(db);
     }

@@ -3,6 +3,7 @@ package com.vy.androidgroup3shoppingapp;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -48,16 +49,14 @@ public class Login extends AppCompatActivity {
         // Validate login credentials
         if (username.equals(savedUsername) && password.equals(savedPassword)) {
             // Login successful
-            Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show();
-
-            // Save the userId for later use
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putInt("userId", userId); // Save the logged-in user's ID
-            editor.putBoolean("isLoggedIn", true); // Track login state
+            editor.putInt("userId", userId); // Save userId for the logged-in user
             editor.apply();
 
-            // Navigate to the main screen (MainActivity)
-            Intent intent = new Intent(Login.this, ProductDetailsActivity.class);
+            Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show();
+
+            // Navigate to MainActivity
+            Intent intent = new Intent(Login.this, MainActivity.class);
             startActivity(intent);
             finish();
         } else {
@@ -65,4 +64,5 @@ public class Login extends AppCompatActivity {
             Toast.makeText(this, "Incorrect Username or Password, or User does not exist.", Toast.LENGTH_SHORT).show();
         }
     }
+
 }

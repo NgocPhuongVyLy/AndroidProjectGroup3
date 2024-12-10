@@ -35,18 +35,20 @@ public class MyCart extends AppCompatActivity {
 
 
 
-//        // Retrieve user ID from shared preferences
+        // Retrieve user ID from shared preferences
         SharedPreferences sharedPref = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
         int userId = sharedPref.getInt("userId", -1); // Default value is -1 if not found
+        Log.d("MyCart", "Retrieved userId from SharedPreferences: " + userId);
 
-        if (userId != -1) {
-            loadCartItems(cartLayout, userId);
-        } else {
+        if (userId == -1) {
+            Log.e("MyCart", "User is not logged in. Redirecting to login.");
             Toast.makeText(this, "User ID not found. Please log in again.", Toast.LENGTH_SHORT).show();
-            // Handle user not logged in scenario (e.g., redirect to login page)
-            Intent loginIntent = new Intent(this, Login.class);
+            Intent loginIntent = new Intent(MyCart.this, Login.class);
             startActivity(loginIntent);
             finish();
+        } else {
+            // Load cart items for this user
+            loadCartItems(cartLayout, userId);
         }
 
 

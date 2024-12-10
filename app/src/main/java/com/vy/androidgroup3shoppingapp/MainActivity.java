@@ -1,6 +1,7 @@
 package com.vy.androidgroup3shoppingapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -60,9 +62,17 @@ public class MainActivity extends AppCompatActivity {
         navProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Navigate to MyUserProfileActivity
-                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
-                startActivity(intent);
+                SharedPreferences sharedPref = getSharedPreferences("UserPreferences", MODE_PRIVATE);
+                boolean isLoggedIn = sharedPref.getBoolean("isLoggedIn", false);
+
+                if (isLoggedIn) {
+                    Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(MainActivity.this, "Please log in first.", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, Login.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -70,11 +80,22 @@ public class MainActivity extends AppCompatActivity {
         navCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Navigate to MyCartActivity
-                Intent intent = new Intent(MainActivity.this, MyCart.class);
-                startActivity(intent);
+                SharedPreferences sharedPref = getSharedPreferences("UserPreferences", MODE_PRIVATE);
+                boolean isLoggedIn = sharedPref.getBoolean("isLoggedIn", false);
+
+                if (isLoggedIn) {
+                    // Navigate to MyCartActivity
+                    Intent intent = new Intent(MainActivity.this, MyCart.class);
+                    startActivity(intent);
+                } else {
+                    // Redirect to Login activity
+                    Toast.makeText(MainActivity.this, "Please log in to access your cart.", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, Login.class);
+                    startActivity(intent);
+                }
             }
         });
+
 
         // Initialize Spinner for category selection
         categorySpinner = findViewById(R.id.spinnerProductType);  // Assume a Spinner is defined in XML

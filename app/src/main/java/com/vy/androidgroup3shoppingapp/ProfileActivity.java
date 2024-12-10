@@ -1,6 +1,7 @@
 package com.vy.androidgroup3shoppingapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -43,6 +44,16 @@ public class ProfileActivity extends AppCompatActivity {
         btnCoupon = findViewById(R.id.btn_coupon);
         btnCrbal = findViewById(R.id.btn_crbal);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
+        boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+
+        if (isLoggedIn) {
+            String username = sharedPreferences.getString("username", "Guest");
+            tvName.setText(username);
+        } else {
+            Toast.makeText(this, "User not logged in.", Toast.LENGTH_SHORT).show();
+            tvName.setText("Guest");
+        }
         // Set up listeners for the buttons
         btnOrders.setOnClickListener(new View.OnClickListener() {
             @Override

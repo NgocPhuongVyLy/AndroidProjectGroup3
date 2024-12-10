@@ -74,14 +74,28 @@ public class Signup extends AppCompatActivity {
     }
 
     // Method to save data in SharedPreferences
+    // Method to save data in SharedPreferences
     private void saveToSharedPreferences(String username, String email, String password) {
         SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        int userId = generateUserId(); // Generate a unique user ID
         editor.putString("username", username);
-        editor.putString("userEmail", email);
+        editor.putString("email", email);
         editor.putString("userPassword", password);
+        editor.putInt(username + "_userId", userId); // Save userId with the username key
+        editor.putInt("userId", userId); // Store globally for logged-in user
         editor.apply();
+
+        Toast.makeText(this, "Sign-up successful! User ID: " + userId, Toast.LENGTH_SHORT).show();
     }
+
+
+    private int generateUserId() {
+        // Generate a unique user ID (e.g., based on a counter or database logic)
+        return (int) (Math.random() * 10000); // Example logic
+    }
+
 
     // Navigate to Login activity
     private void navigateToLogin() {
